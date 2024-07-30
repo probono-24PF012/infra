@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qa-board
+  labels:
+    app: qa-board
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: qa-board
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: qa-board
+    spec:
+      containers:
+      - name: qa-board
+        image: matkimchi/probono_qa_board:5
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qa-service 
+  labels:
+    app: qa-board
+spec:
+  selector:
+    app: qa-board
+  ports:
+  - port: 9080
+    name: http
+

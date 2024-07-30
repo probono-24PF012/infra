@@ -1,0 +1,44 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: probono-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default controller
+  servers:
+  - port:
+      number: 8080
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: pobono-service
+  namespace: default
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - probono-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /qa-board
+    route:
+    - destination:
+        host: qa-service
+        port:
+          number: 9080
+  # - match:
+  #   - uri:
+  #       prefix: /chatbot
+  #   route:
+  #   - destination:
+  #       host: chatbot-service
+  #       port:
+  #         number: 9080
+
+    
