@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: qa-board
-        image: matkimchi/probono_qa_board:17
+        image: matkimchi/probono_qa_board:187
         imagePullPolicy: Always
         ports:
         - containerPort: 9080
