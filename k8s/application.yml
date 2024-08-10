@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
       - name: chatbot
-        image: matkimchi/probono_chatbot:1
+        image: matkimchi/probono_chatbot:7
         imagePullPolicy: Always
         ports:
         - containerPort: 9080
