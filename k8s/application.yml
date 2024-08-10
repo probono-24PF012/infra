@@ -22,6 +22,30 @@ spec:
         ports:
         - containerPort: 9080
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot
+  labels:
+    app: chatbot
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: chatbot
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: chatbot
+    spec:
+      containers:
+      - name: chatbot
+        image: matkimchi/probono_chatbot:1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -34,4 +58,14 @@ spec:
   ports:
   - port: 9080
     name: http
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatbot-service 
+  labels:
+    app: chatbot
+  ports:
+  - port: 9080
+    name: http
+    
