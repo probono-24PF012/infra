@@ -69,7 +69,7 @@ spec:
     spec:
       containers:
       - name: announcement
-        image: matkimchi/probono_announcement:1
+        image: matkimchi/probono_announcement:3
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
