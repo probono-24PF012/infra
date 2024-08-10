@@ -20,7 +20,7 @@ spec:
         image: matkimchi/probono_qa_board:375
         imagePullPolicy: Always
         ports:
-        - containerPort: 9080
+        - containerPort: 8090
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -41,10 +41,62 @@ spec:
     spec:
       containers:
       - name: chatbot
+<<<<<<< HEAD
         image: matkimchi/probono_chatbot:110
+=======
+        image: matkimchi/probono_chatbot:10
+>>>>>>> 35cc554 (test)
         imagePullPolicy: Always
         ports:
-        - containerPort: 9080
+        - containerPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: announcement
+  labels:
+    app: announcement
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: announcement
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: announcement
+    spec:
+      containers:
+      - name: announcement
+        image: matkimchi/probono_announcement:1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login
+  labels:
+    app: login
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: login
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: login
+    spec:
+      containers:
+      - name: login
+        image: matkimchi/probono_login:1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -56,7 +108,7 @@ spec:
   selector:
     app: qa-board
   ports:
-  - port: 9080
+  - port: 8090
     name: http
 ---
 apiVersion: v1
@@ -65,7 +117,39 @@ metadata:
   name: chatbot-service 
   labels:
     app: chatbot
+spec:
+  selector:
+    app: chatbot
   ports:
-  - port: 9080
+  - port: 8000
     name: http
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: announcement-service 
+  labels:
+    app: announcement
+spec:
+  selector:
+    app: announcement
+  ports:
+  - port: 8080
+    name: http
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: login-service 
+  labels:
+    app: login
+spec:
+  selector:
+    app: login
+  ports:
+  - port: 8080
+    name: http
+
     

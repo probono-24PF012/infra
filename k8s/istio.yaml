@@ -7,7 +7,7 @@ spec:
     istio: ingressgateway # use Istio default controller
   servers:
   - port:
-      number: 8080
+      number: 80
       name: http
       protocol: HTTP
     hosts:
@@ -31,7 +31,7 @@ spec:
     - destination:
         host: qa-service
         port:
-          number: 9080
+          number: 8090
   - match:
     - uri:
         prefix: /chatbot
@@ -39,6 +39,20 @@ spec:
     - destination:
         host: chatbot-service
         port:
-          number: 9080
-
-    
+          number: 8000
+  - match:
+    - uri:
+        prefix: /members
+    route:
+    - destination:
+        host: login-service
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /announcement
+    route:
+    - destination:
+        host: announcement-service
+        port:
+          number: 8080
