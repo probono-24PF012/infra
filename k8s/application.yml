@@ -93,7 +93,7 @@ spec:
     spec:
       containers:
       - name: login
-        image: matkimchi/probono_login:1
+        image: matkimchi/probono_login:3
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
