@@ -42,9 +42,9 @@ spec:
       containers:
       - name: chatbot
 <<<<<<< HEAD
-        image: matkimchi/probono_chatbot:1410
+        image: matkimchi/probono_chatbot:15410
 =======
-        image: matkimchi/probono_chatbot:140
+        image: matkimchi/probono_chatbot:1540
 >>>>>>> 35cc554 (test)
         imagePullPolicy: Always
         ports:
